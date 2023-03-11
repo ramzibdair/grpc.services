@@ -1,0 +1,20 @@
+version: '3.7'
+
+services:
+  mongodb:
+    image: mongo
+
+  order.service:
+    image: ${DOCKER_REGISTRY-}orderserviec
+    build:
+      context: .
+      dockerfile: OrderService/Dockerfile
+
+  stock.service:
+    image: ${DOCKER_REGISTRY-}stockserviec
+    build:
+      context: .
+      dockerfile: StockService/Dockerfile
+
+volumes:
+  mongo_data:

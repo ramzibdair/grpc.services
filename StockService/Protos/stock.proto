@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+option csharp_namespace = "StockService.Protos";
+
+service StockProtoService {
+ 
+  rpc GetProduct (ProductRequet) returns (ProductModal);
+
+  rpc UpdateProductCount (UpdateProductCountRequet) returns (ProductModal);
+}
+
+// The request message containing the user's name.
+message ProductRequet {
+  string ProductId = 1;
+}
+
+// The response message containing the greetings.
+message  ProductModal {
+  string id = 1;
+	string productName = 2;
+	int32 count = 3;
+}
+
+message UpdateProductCountRequet {
+  string ProductId = 1;
+  int32 count = 2; 
+}

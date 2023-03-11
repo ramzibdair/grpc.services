@@ -1,0 +1,30 @@
+version: '3.7'
+
+services:
+  mongodb:
+    container_name: mongodb
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  order.service:
+    container_name: order.service
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "OrderDatabase:ConnectionString=mongodb://mongodb:27017"
+    depends_on:
+      - mongodb
+    ports:
+      - "8000:80"
+
+  stock.service:
+    container_name: stock.service
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "StockDatabase:ConnectionString=mongodb://mongodb:27017"
+    depends_on:
+      - mongodb
+    ports:
+      - "8001:80"
